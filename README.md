@@ -1,1 +1,20 @@
 # USB-interfaced-Transistor-Curve-Tracer
+This USB interfaced Transistor Curve Tracer is an USB-instrument that collect the data for plotting the static collector curve of an NPN transistor (a family of curves of collector current, I<sub>C</sub>, versus collector-to-emitter voltage, V<sub>CE</sub>, for various values of base current, I<sub>B</sub>.). 
+
+The circuit was made around a PIC18f4550 microcontroller which has built in USB 2.0 capabilities. PIC18f4550It also has 10bit- ADC (Analog to Digital Converter). On the host side (PC/Laptop), a GUI (Graphical User Interface) application has been created (using C#) to operate the device.
+
+## PRINCIPLE OF OPERATION
+Three basic functional circuits are used to generate this display: 
+1.	A sweep voltage generator for control of the collector voltage (V<sub>CC</sub>). 
+2.	A base current (I<sub>B</sub>) source which can be controlled to provide a number of equal increments of base currents with each sweep of the voltage generator.
+3.	A timing source to change the base current at the start of each voltage sweep.
+
+The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary V<sub>CC</sub>. By measuring I<sub>C</sub> and V<sub>CE</sub>, we get the data for graphing I<sub>C</sub> versus V<sub>CE</sub>. Since we know the V<sub>CC</sub>, V<sub>BB</sub>, R<sub>C</sub>, R<sub>B</sub> and we get the value of V<sub>CE</sub> from the device, we can calculate the I<sub>B</sub> and I<sub>C</sub> as follows:
+#### I<sub>B</sub>=  (V<sub>BB</sub>-0.7)/R<sub>B</sub>   and   I<sub>C</sub>=  (V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
+
+![Alt text](/Fig1.png?raw=true "Curve")
+###### Figure 1: I<sub>C</sub>-V<sub>CE</sub> Curve of an NPN transistor
+
+
+![Alt text](/Fig2.png?raw=true "Schematic Diagram")
+###### Figure 2: Schematic Diagram
