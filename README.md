@@ -95,9 +95,13 @@ I<sub>C</sub>=(V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
 
 Then using the file generated in **step 6**, we plot the I<sub>C</sub>, versus V<sub>CE</sub>, for various values of base current, I<sub>B</sub>.
 ### Simulation using proteus
-Simulator: ISIS Proteus, Transistor: 2N3904, R<sub>B</sub>=100K ohm, R<sub>C</sub>=1k ohm, I<sub>B</sub>=17.77uA
-The circuit looks like this:
+Simulator: ISIS Proteus. The circuit looks like this:
 
 ![Alt text](/Fig5_simulation_proteus.jpg?raw=true "Simulation")
 ###### Figure 5: Simulation in proteus
 
+The following curve was generated from the simulation (Transistor: 2N3904, R<sub>B</sub>=100K ohm, R<sub>C</sub>=1k ohm, I<sub>B</sub>=17.77uA):
+The data that produced the curve is in the file 'SimulatedData.txt'.
+
+![Alt text](/Fig6_curve_simulated.png?raw=true "Curve")
+###### Figure 6: Simulated characteristic curve
