@@ -80,7 +80,7 @@ The programs step can be summarized as follows:
 
 **Step 4:** Wait for the DAC conversion of the port B (V<sub>CC</sub>) and of port D(V<sub>BB</sub>)Value
 
-**Step 5:** Do the Analog to Digital conversion of the VCE and send the value back to host PC
+**Step 5:** Do the Analog to Digital conversion of the V<sub>CE</sub> and send the value back to host PC
 
 **Step 6:** The host PC writes the data in a file.
 
@@ -93,6 +93,11 @@ I<sub>B</sub>= (V<sub>BB</sub> -0.7)/R<sub>B</sub>
 
 I<sub>C</sub>=(V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
 
-Then we plot the I<sub>C</sub>, versus V<sub>CE</sub>, for various values of base current, I<sub>B</sub>.
+Then using the file generated in **step 6**, we plot the I<sub>C</sub>, versus V<sub>CE</sub>, for various values of base current, I<sub>B</sub>.
+### Simulation using proteus
+Simulator: ISIS Proteus, Transistor: 2N3904, R<sub>B</sub>=100K ohm, R<sub>C</sub>=1k ohm, I<sub>B</sub>=17.77uA
+The circuit looks like this:
 
+![Alt text](/Fig5_simulation_proteus.jpg?raw=true "Simulation")
+###### Figure 5: Simulation in proteus
 
