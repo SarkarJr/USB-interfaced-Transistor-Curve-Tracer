@@ -70,24 +70,25 @@ The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary
 
 The programs step can be summarized as follows:
 
-Step 1: Enumerate the device with the host PC.
+**Step 1:** Enumerate the device with the host PC.
 
-Step 2: Send from PC to device - the digital equivalent of V<sub>CC</sub> and of V<sub>BB</sub> values
+**Step 2:** Send from PC to device - the digital equivalent of V<sub>CC</sub> and of V<sub>BB</sub> values
 
-Step 3: The device receives the data and set port B and port D accordingly
+**Step 3:** The device receives the data and set port B and port D accordingly
 
-Step 4: Wait for the DAC conversion of the port B (V<sub>CC</sub>) and of port D(V<sub>BB</sub>)Value
+**Step 4:** Wait for the DAC conversion of the port B (V<sub>CC</sub>) and of port D(V<sub>BB</sub>)Value
 
-Step 5: Do the Analog to Digital conversion of the VCE and send the value back to host PC
+**Step 5:** Do the Analog to Digital conversion of the VCE and send the value back to host PC
 
-Step 6: The host PC writes the data in a file.
+**Step 6:** The host PC writes the data in a file.
 
-Step 7: Repeat step-2 to step-6 as many times as needed with different values to produce the curve.
+**Step 7:** Repeat step-2 to step-6 as many times as needed with different values to produce the curve.
 
 
 Since we know the V<sub>CC</sub> ,V<sub>BB</sub>, R<sub>C</sub> and R<sub>B</sub> ; and we get the value of V<sub>CE</sub> from the device, we can calculate the I<sub>B</sub> and I<sub>C</sub> as follows:
 
 I<sub>B</sub>= (V<sub>BB</sub> -0.7)/R<sub>B</sub>
+
 I<sub>C</sub>=(V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
 
 
