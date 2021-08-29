@@ -104,4 +104,4 @@ The following curve was generated from the simulation (Transistor: 2N3904, R<sub
 The data that produced the curve is in the file 'SimulatedData.txt'.
 
 ![Alt text](/Fig6_curve_simulated.png?raw=true "Curve")
-###### Figure 6: Simulated characteristic curve
+###### Figure 6: Simulated  I<sub>C</sub> versus V<sub>CE</sub> curve
