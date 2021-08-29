@@ -18,3 +18,20 @@ The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary
 
 ![Alt text](/Fig2.png?raw=true "Schematic Diagram")
 ###### Figure 2: Schematic Diagram
+
+## MAJOR COMPONENTS
+### 1. IC PIC18F4550
+![Alt text](/Fig3_pic18f4550.png?raw=true "PIC18F4550")
+###### Figure 3: Micro-Controller PIC18F4550
+##### Universal Serial Bus Features:
+•	USB V2.0 Compliant
+•	Low Speed (1.5 Mb/s) and Full Speed (12 Mb/s)
+•	Supports Control, Interrupt, Isochronous and Bulk Transfers
+•	Supports up to 32 Endpoints (16 bidirectional)
+•	1 Kbyte Dual Access RAM for USB
+•	On-Chip USB Transceiver with On-Chip Voltage Regulator
+##### Peripheral Highlights:
+•	10-Bit, Up to 13-Channel Analog-to-Digital Converter (A/D) module with Programmable Acquisition Time
+##### Special Microcontroller Features:
+•	C Compiler Optimized Architecture with Optional Extended Instruction Set
+•	Wide Operating Voltage Range (2.0V to 5.5V)
