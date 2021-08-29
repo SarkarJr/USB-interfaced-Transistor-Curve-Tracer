@@ -37,9 +37,9 @@ The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary
 •	Wide Operating Voltage Range (2.0V to 5.5V)
 
 ### 2. IC DAC0800: Digital to Analog Converter
-The DAC0800 series are monolithic 8-bit high-speed current-output digital-to-analog converters.
 ![Alt text](/Fig4_dac0800.png?raw=true "DAC0800")
 ###### Figure 4: IC DAC0800: Digital to Analog Converter
+The DAC0800 series are monolithic 8-bit high-speed current-output digital-to-analog converters.
 ##### DAC0800 Features:
 •	Fast settling output current: 100 ns
 •	Full scale error: ±1 LSB
