@@ -105,3 +105,22 @@ The data that produced the curve is in the file 'SimulatedData.txt'.
 
 ![Alt text](/Fig6_curve_simulated.png?raw=true "Curve")
 ###### Figure 6: Simulated  I<sub>C</sub> versus V<sub>CE</sub> curve
+
+
+## Code Explanation
+There are two separate programs, one in the host PC/Laptop and the other in the microcontroller of the curve tracer. 
+### Host Side
+The host side program uses a series of API calls to locate a HID-class device by its Vendor ID and Product ID. It returns _True_ if the device is detected, _False_ if not detected. 
+
+If the device is detected, the device is registered to the OS for receiving notifications regarding the removal or attachment to the USB-port. Data is trnsferred to and from the device using reports. The program gets _handles_ to use for requesting _Input reports_ from the curve tracer device and generating _Output reports_ to .
+
+If the device wasn't detected, the information is displayed in the form's list box.
+
+When the EXECUTE button is pressed, the function ReadAndWriteToDevice(i, j) is called with various values of  i (PORT B=V<sub>BB</sub>) and j(PORT D=V<sub>CC</sub>) in a loop.
+
+**ReadAndWriteToDevice(i, j)** function tries to write the values into Feature Report Buffer. If it succeeds, it then reads the response (VCE) sent by the device from the Feature Report Buffer. Both the written and read values are then stored in a text file. This text file is then used to draw the curves.
+
+
+
+
+
