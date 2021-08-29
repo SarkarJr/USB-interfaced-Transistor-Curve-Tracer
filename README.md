@@ -67,9 +67,8 @@ Windows' built-in HID (human interface device) driver was used to communicate wi
 
 ## THE ALGORITHM
 The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary V<sub>CC</sub>. By measuring I<sub>C</sub> and V<sub>CE</sub>, we get the data for graphing I<sub>C</sub> versus V<sub>CE</sub>. 
-Figure 2 is shown here again to juxtapose the algorithm with the schematic diagram.
+_Figure 2_ is shown here again to juxtapose the algorithm with the schematic diagram.
 ![Alt text](/Fig2.png?raw=true "Schematic Diagram")
-###### Figure 2: Schematic Diagram
 
 The programs step can be summarized as follows:
 
@@ -93,7 +92,6 @@ Since we know the V<sub>CC</sub> ,V<sub>BB</sub>, R<sub>C</sub> and R<sub>B</sub
 I<sub>B</sub>= (V<sub>BB</sub> -0.7)/R<sub>B</sub>
 
 I<sub>C</sub>=(V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
-
 
 Then we plot the I<sub>C</sub>, versus V<sub>CE</sub>, for various values of base current, I<sub>B</sub>.
 
