@@ -93,3 +93,8 @@ I<sub>C</sub>=(V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
 
 
 Then we plot the I<sub>C</sub>, versus V<sub>CE</sub>, for various values of base current, I<sub>B</sub>.
+
+Figure 2 is shown here again to juxtapose the algorithm with the schematic diagram.
+![Alt text](/Fig2.png?raw=true "Schematic Diagram")
+###### Figure 2: Schematic Diagram
+
