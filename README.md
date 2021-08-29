@@ -49,4 +49,19 @@ The DAC0800 series are monolithic 8-bit high-speed current-output digital-to-ana
 •	Interface directly with TTL, CMOS, PMOS and others
 •	Wide power supply range: ±4.5V to ±18V
 •	Low power consumption: 33 mW at ±5V
-•	Low cost
+
+### REQUIRED SOFTWARES
+Windows' built-in HID (human interface device) driver was used to communicate with the device. There's no need for a custom driver. Any device that can function within the limits of the HID specification (i.e., control and interrupt transfers only) may be able to be designed as an HID. C# was used to develop the host side software (any programming language that supports calling the HID-API functions is okay).
+#### For host side software development:
+•	Microsoft Visual C# 2008 Express Edition
+
+#### For Firmware development:
+•	MPLAB IDE V8.46
+•	The Microchip PIC18F Microchip Application Libraries  V2.6a
+•	HI-TECH C Compiler for PIC18MCUs Version 9.80 
+
+#### For simulation:
+•	Proteus 7 Professional
+
+*All these softwares were freely available from their respective websites.
+
