@@ -35,3 +35,18 @@ The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary
 ##### Special Microcontroller Features:
 •	C Compiler Optimized Architecture with Optional Extended Instruction Set
 •	Wide Operating Voltage Range (2.0V to 5.5V)
+
+### 2. IC DAC0800: Digital to Analog Converter
+The DAC0800 series are monolithic 8-bit high-speed current-output digital-to-analog converters.
+![Alt text](/Fig4_DAC0800.png?raw=true "DAC0800")
+###### Figure 4: IC DAC0800: Digital to Analog Converter
+##### DAC0800 Features:
+•	Fast settling output current: 100 ns
+•	Full scale error: ±1 LSB
+•	Nonlinearity over temperature: ±0.1%
+•	High output compliance: −10V to +18V
+•	Complementary current outputs
+•	Interface directly with TTL, CMOS, PMOS and others
+•	Wide power supply range: ±4.5V to ±18V
+•	Low power consumption: 33 mW at ±5V
+•	Low cost
