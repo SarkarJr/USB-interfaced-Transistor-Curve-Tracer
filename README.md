@@ -12,16 +12,16 @@ Three basic functional circuits are used to generate this display:
 The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary V<sub>CC</sub>. By measuring I<sub>C</sub> and V<sub>CE</sub>, we get the data for graphing I<sub>C</sub> versus V<sub>CE</sub>. Since we know the V<sub>CC</sub>, V<sub>BB</sub>, R<sub>C</sub>, R<sub>B</sub> and we get the value of V<sub>CE</sub> from the device, we can calculate the I<sub>B</sub> and I<sub>C</sub> as follows:
 #### I<sub>B</sub>=  (V<sub>BB</sub>-0.7)/R<sub>B</sub>   and   I<sub>C</sub>=  (V<sub>CC</sub>-V<sub>CE</sub>)/R<sub>C</sub>
 
-![Alt text](/Fig1.png?raw=true "Curve")
+![Alt text](/Figures/Fig1.png?raw=true "Curve")
 ###### Figure 1: I<sub>C</sub>-V<sub>CE</sub> Curve of an NPN transistor
 
 
-![Alt text](/Fig2.png?raw=true "Schematic Diagram")
+![Alt text](/Figures/Fig2.png?raw=true "Schematic Diagram")
 ###### Figure 2: Schematic Diagram
 
 ## MAJOR COMPONENTS
 ### 1. IC PIC18F4550
-![Alt text](/Fig3_pic18f4550.png?raw=true "PIC18F4550")
+![Alt text](/Figures/Fig3_pic18f4550.png?raw=true "PIC18F4550")
 ###### Figure 3: Micro-Controller PIC18F4550
 ##### Universal Serial Bus Features:
 •	USB V2.0 Compliant
@@ -37,7 +37,7 @@ The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary
 •	Wide Operating Voltage Range (2.0V to 5.5V)
 
 ### 2. IC DAC0800: Digital to Analog Converter
-![Alt text](/Fig4_dac0800.png?raw=true "DAC0800")
+![Alt text](/Figures/Fig4_dac0800.png?raw=true "DAC0800")
 ###### Figure 4: IC DAC0800: Digital to Analog Converter
 The DAC0800 series are monolithic 8-bit high-speed current-output digital-to-analog converters.
 ##### DAC0800 Features:
@@ -68,7 +68,7 @@ Windows' built-in HID (human interface device) driver was used to communicate wi
 ## THE ALGORITHM
 The procedure is to set a value of I<sub>B</sub> and hold it fixed while we vary V<sub>CC</sub>. By measuring I<sub>C</sub> and V<sub>CE</sub>, we get the data for graphing I<sub>C</sub> versus V<sub>CE</sub>. 
 _Figure 2_ is shown here again to juxtapose the algorithm with the schematic diagram.
-![Alt text](/Fig2.png?raw=true "Schematic Diagram")
+![Alt text](/Figures/Fig2.png?raw=true "Schematic Diagram")
 
 The programs step can be summarized as follows:
 
@@ -97,13 +97,13 @@ Then using the file generated in **step 6**, we plot the I<sub>C</sub>, versus V
 ### Simulation using proteus
 Simulator: ISIS Proteus. The circuit looks like this:
 
-![Alt text](/Fig5_simulation_proteus.jpg?raw=true "Simulation")
+![Alt text](/Figures/Fig5_simulation_proteus.jpg?raw=true "Simulation")
 ###### Figure 5: Simulation in proteus
 
 The following curve was generated from the simulation (Transistor: 2N3904, R<sub>B</sub>=100K ohm, R<sub>C</sub>=1k ohm, I<sub>B</sub>=17.77uA):
 The data that produced the curve is in the file 'SimulatedData.txt'.
 
-![Alt text](/Fig6_curve_simulated.png?raw=true "Curve")
+![Alt text](/Figures/Fig6_curve_simulated.png?raw=true "Curve")
 ###### Figure 6: Simulated  I<sub>C</sub> versus V<sub>CE</sub> curve
 
 
