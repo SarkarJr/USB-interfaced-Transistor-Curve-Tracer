@@ -165,7 +165,17 @@ When the **EXECUTE** button is pressed, the function **ReadAndWriteToDevice(i, j
     success = MyHid.GetFeatureReport (hidHandle, ref inFeatureReportBuffer);
 
 ...//more code to process the arrived data and store it
+```
 
+When the device is plugged in for the first time, the following “Found New Hardware” notification appears.
+
+![Alt text](/Figures/Fig7_plugged_1st.jpg?raw=true "Plugged in for the first time")
+###### Figure 7: Notification when the device is first plugged into the PC
+
+The host application looks like this on operation:
+
+![Alt text](/Figures/Fig8_hostPC_application.jpg?raw=true "Host Application")
+###### Figure 8: Graphical User Interface of the host application
 
 
 
