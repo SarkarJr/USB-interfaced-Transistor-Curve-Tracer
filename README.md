@@ -110,15 +110,61 @@ The data that produced the curve is in the file 'SimulatedData.txt'.
 ## Code Explanation
 There are two separate programs, one in the host PC/Laptop and the other in the microcontroller of the curve tracer. 
 ### Host Side
-The host side program uses a series of API calls to locate a HID-class device by its Vendor ID and Product ID. It returns _True_ if the device is detected, _False_ if not detected. 
+The host side program uses a series of API calls to locate a HID-class device by its Vendor ID and Product ID. It returns _True_ if the device is detected, _False_ if not detected. If the device wasn't detected, the information is displayed in the form's list box. If the device is detected, the device is registered to the OS for receiving notifications regarding the removal or attachment to the USB-port. Data is trnsferred to and from the device using reports. The program gets _handles_ to use for requesting _Input reports_ from the curve tracer device, and generating and sending _Output reports_ to the device.
 
-If the device is detected, the device is registered to the OS for receiving notifications regarding the removal or attachment to the USB-port. Data is trnsferred to and from the device using reports. The program gets _handles_ to use for requesting _Input reports_ from the curve tracer device and generating _Output reports_ to .
 
-If the device wasn't detected, the information is displayed in the form's list box.
+```
+...
+                deviceFound = MyDeviceManagement.FindDeviceFromGuid( hidGuid, ref devicePathName ); 
+                ...
+     						hidHandle = FileIO.CreateFile(devicePathName[memberIndex], 0,  FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE, IntPtr.Zero, FileIO.OPEN_EXISTING, 0, 0);
+                ...
+      							
+                            success = Hid.HidD_GetAttributes(hidHandle, ref MyHid.DeviceAttributes); 
+                            
+                            if ( success ) 
+                            {                                
+                                //  Find out if the device matches the one we're looking for.
+                                
+                                if ( ( MyHid.DeviceAttributes.VendorID == myVendorID ) && ( MyHid.DeviceAttributes.ProductID == myProductID ) )
+                                {          
+                                    myDeviceDetected = true;
+                                    //  Display the information in form's list box.
+                                    lstResults.Items.Add( "Device detected:" );
+                                    myDevicePathName = devicePathName[ memberIndex ]; 
+                                    
+                                    ...
+                                    
+                                    success = MyDeviceManagement.RegisterForDeviceNotifications( myDevicePathName, FrmMy.Handle, hidGuid, ref deviceNotificationHandle ); 
+                                    
+                                    ...
+                                    
+                                    hidHandle.Close();
+                                    hidHandle = FileIO.CreateFile(myDevicePathName, FileIO.GENERIC_READ | FileIO.GENERIC_WRITE, FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE, IntPtr.Zero, FileIO.OPEN_EXISTING, 0, 0);
+                                    ...
+                                    ...
+                                
+                                
+```
+When the **EXECUTE** button is pressed, the function **ReadAndWriteToDevice(i, j)** is called with various values of  i and j(for setting PORT B=V<sub>BB</sub> and PORT D=V<sub>CC</sub>) in a loop. **ReadAndWriteToDevice(i, j)** function sends the values to the device using Feature Reports. If it succeeds, it then reads the response (V<sub>CE</sub>) sent by the device from the Feature Report Buffer. Both the written and read values are then stored in a text file. This text file is then used to draw the curves. **ReadAndWriteToDevice(i, j)** uses codes like this to _write to_ and _read from_ the device
 
-When the EXECUTE button is pressed, the function ReadAndWriteToDevice(i, j) is called with various values of  i (PORT B=V<sub>BB</sub>) and j(PORT D=V<sub>CC</sub>) in a loop.
+```
+...
+Byte[] outFeatureReportBuffer = null; 
+outFeatureReportBuffer = new Byte[ MyHid.Capabilities.FeatureReportByteLength ]; 
+...//Place of code to populate the buffer with data which will be sent to the device
+//  Write a report to the device
+success = MyHid.SendFeatureReport(hidHandle, outFeatureReportBuffer);
+...
 
-**ReadAndWriteToDevice(i, j)** function tries to write the values into Feature Report Buffer. If it succeeds, it then reads the response (VCE) sent by the device from the Feature Report Buffer. Both the written and read values are then stored in a text file. This text file is then used to draw the curves.
+Byte[] inFeatureReportBuffer = null; 
+inFeatureReportBuffer = new Byte[ MyHid.Capabilities.FeatureReportByteLength ]; 
+//  Read a report.
+success = MyHid.GetFeatureReport (hidHandle, ref inFeatureReportBuffer);
+...//Place for code to process the arrived data and store it
+
+```            
+
 
 
 
