@@ -115,34 +115,33 @@ The host side program uses a series of API calls to locate a HID-class device by
 
 ```
 ...
-                deviceFound = MyDeviceManagement.FindDeviceFromGuid( hidGuid, ref devicePathName ); 
-                ...
-     						hidHandle = FileIO.CreateFile(devicePathName[memberIndex], 0,  FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE, IntPtr.Zero, FileIO.OPEN_EXISTING, 0, 0);
-                ...
+    deviceFound = MyDeviceManagement.FindDeviceFromGuid( hidGuid, ref devicePathName ); 
+    ...
+    hidHandle = FileIO.CreateFile(devicePathName[memberIndex], 0,  FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE, IntPtr.Zero, FileIO.OPEN_EXISTING, 0, 0);
+    ...
       							
-                            success = Hid.HidD_GetAttributes(hidHandle, ref MyHid.DeviceAttributes); 
+        success = Hid.HidD_GetAttributes(hidHandle, ref MyHid.DeviceAttributes); 
                             
-                            if ( success ) 
-                            {                                
-                                //  Find out if the device matches the one we're looking for.
+        if ( success ) 
+        {                                
+                //  Find out if the device matches the one we're looking for.
                                 
-                                if ( ( MyHid.DeviceAttributes.VendorID == myVendorID ) && ( MyHid.DeviceAttributes.ProductID == myProductID ) )
-                                {          
-                                    myDeviceDetected = true;
-                                    //  Display the information in form's list box.
-                                    lstResults.Items.Add( "Device detected:" );
-                                    myDevicePathName = devicePathName[ memberIndex ]; 
+                if ( ( MyHid.DeviceAttributes.VendorID == myVendorID ) && ( MyHid.DeviceAttributes.ProductID == myProductID ) )
+                {          
+                    myDeviceDetected = true;
+                    //  Display the information in form's list box.
+                    lstResults.Items.Add( "Device detected:" );
+                    myDevicePathName = devicePathName[ memberIndex ]; 
+    
+                    ...
+                                   
+                    success = MyDeviceManagement.RegisterForDeviceNotifications( myDevicePathName, FrmMy.Handle, hidGuid, ref deviceNotificationHandle ); 
                                     
-                                    ...
+                    ...
                                     
-                                    success = MyDeviceManagement.RegisterForDeviceNotifications( myDevicePathName, FrmMy.Handle, hidGuid, ref deviceNotificationHandle ); 
-                                    
-                                    ...
-                                    
-                                    hidHandle.Close();
-                                    hidHandle = FileIO.CreateFile(myDevicePathName, FileIO.GENERIC_READ | FileIO.GENERIC_WRITE, FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE, IntPtr.Zero, FileIO.OPEN_EXISTING, 0, 0);
-                                    ...
-                                    ...
+                    hidHandle.Close();
+                    hidHandle = FileIO.CreateFile(myDevicePathName, FileIO.GENERIC_READ | FileIO.GENERIC_WRITE, FileIO.FILE_SHARE_READ | FileIO.FILE_SHARE_WRITE, IntPtr.Zero, FileIO.OPEN_EXISTING, 0, 0);
+                    ...
                                 
                                 
 ```
@@ -150,20 +149,22 @@ When the **EXECUTE** button is pressed, the function **ReadAndWriteToDevice(i, j
 
 ```
 ...
-Byte[] outFeatureReportBuffer = null; 
-outFeatureReportBuffer = new Byte[ MyHid.Capabilities.FeatureReportByteLength ]; 
+    Byte[] outFeatureReportBuffer = null; 
+    outFeatureReportBuffer = new Byte[ MyHid.Capabilities.FeatureReportByteLength ]; 
+    
 ...//Place of code to populate the buffer with data which will be sent to the device
-//  Write a report to the device
-success = MyHid.SendFeatureReport(hidHandle, outFeatureReportBuffer);
+
+    //  Write a report to the device
+    success = MyHid.SendFeatureReport(hidHandle, outFeatureReportBuffer);
 ...
 
-Byte[] inFeatureReportBuffer = null; 
-inFeatureReportBuffer = new Byte[ MyHid.Capabilities.FeatureReportByteLength ]; 
-//  Read a report.
-success = MyHid.GetFeatureReport (hidHandle, ref inFeatureReportBuffer);
-...//Place for code to process the arrived data and store it
+    Byte[] inFeatureReportBuffer = null; 
+    inFeatureReportBuffer = new Byte[ MyHid.Capabilities.FeatureReportByteLength ]; 
+    
+    //  Read a report.
+    success = MyHid.GetFeatureReport (hidHandle, ref inFeatureReportBuffer);
 
-```            
+...//more code to process the arrived data and store it
 
 
 
