@@ -249,3 +249,5 @@ The bit-descriptions of the three ADC control-registers are given in Figures 9-1
 ![Alt text](/Figures/ADCON2.jpg?raw=true "ADCON2")
 ###### Figure 11: A/D Control Register 2 (ADCON2)
 
+#### Acknowledgement
+Prof. Shamim Ahmad (Dept. of CSE, University of Rajshahi) mentored this work. Examples from Jan Axelson's open source HID repository (http://janaxelson.com/hidpage.htm) were used (adapted and modified) as required in this project. I would like to thank both Prof. Ahmad and Mr. Axelson for their direct and indirect contributions.
