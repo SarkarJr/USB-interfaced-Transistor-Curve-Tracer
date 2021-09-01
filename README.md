@@ -108,9 +108,15 @@ The data that produced the curve is in the file 'SimulatedData.txt'.
 
 
 ## Code Explanation
-There are two separate programs, one in the host PC/Laptop and the other in the microcontroller of the curve tracer. 
-### Host Side
-The host side program uses a series of API calls to locate a HID-class device by its Vendor ID and Product ID. It returns _True_ if the device is detected, _False_ if not detected. If the device wasn't detected, the information is displayed in the form's list box. If the device is detected, the device is registered to the OS for receiving notifications regarding the removal or attachment to the USB-port. Data is trnsferred to and from the device using reports. The program gets _handles_ to use for requesting _Input reports_ from the curve tracer device, and generating and sending _Output reports_ to the device.
+There are two separate programs, one in the host PC/Laptop and the other in the microcontroller of the curve tracer.
+
+The USB interface has been around for many years, but only recently it has become common in the low cost microcontroller world. Unlike serial and parallel interfaces, USB needs a complicated enumeration process in order establish a communication channel. USB frameworks are code libraries that hide the details of the protocol, so it is possible to use the interface very quickly to communicate with a PC without knowing the lower level details. One of the most used framework comes freely from Microchip. We use C# on the host side software with the .NET Framework 2.0.(any language that supports calling USB-HID API functions may do).
+
+So basically we only care about transferring data. In USB communication, data is exchanged by means of an **_output report_** and an **_input report_** (with direction respectively _from_ and _to_ the PC) or a **_feature report_**- (both directions). The difference between input/output report and feature report is that the former uses generally an interrupt transfer and the latter always a control transfer, which is shared with the standard USB message flow; in this case, unlike interrupt transfers, the operating system does not guarantee a maximum latency but balances the data flow as it thinks is better. We used feature reports in the program but input/output report could have been used instead as well.
+
+
+### Host Side Code Explanation
+The host side program uses a series of API calls to locate a HID-class device by its Vendor ID and Product ID. It returns _True_ if the device is detected, _False_ if not detected. If the device wasn't detected, the information is displayed in the form's list box. If the device is detected, the device is registered to the OS for receiving notifications regarding the removal or attachment to the USB-port. Data is trnsferred to and from the device using reports. The program gets _handles_ for sending data (to set values on PORT-B and PORT-D, which controls the V<sub>BB</sub> and V<sub>CC</sub> respectively) and receiving data (V<sub>CE</sub>) from the curve tracer device.
 
 
 ```
@@ -177,7 +183,69 @@ The host application looks like this on operation:
 ![Alt text](/Figures/Fig8_hostPC_application.jpg?raw=true "Host Application")
 ###### Figure 8: Graphical User Interface of the host application
 
+### Device Side Code Explanation
 
+The following code segment is the heart of the microcontroller's program (Other code parts are responsible for the USB communication): 
 
+```
+//set  port B and port D according to the values sent by the host PC
+LATB = hid_report_feature[0]; //(V<sub>BB</sub>)
+LATD = hid_report_feature[1]; //V<sub>CC</sub>
 
+//Measure the resulting V<sub>CE</sub> using Analog-to-Digital Conversion(ADC)
+WORD_VAL adcread;
+adcread= ADCRead();
+
+//send the ADC value (i.e., V<sub>CE</sub>) to host PC
+hid_report_feature[0]=adcread.v[1];	//adresh
+hid_report_feature[1]=adcread.v[0];	//adresl
+```
+
+The ADCRead() function is a user-defined function. PIC18F4550 icrocontroller's 10-bit ADC module has five registers: 
+    •	A/D Result High Register (ADRESH)
+    •	A/D Result Low Register (ADRESL)
+    •	A/D Control Register 0 (ADCON0)
+    •	A/D Control Register 1 (ADCON1)
+    •	A/D Control Register 2 (ADCON2)
+
+The following steps should be followed to perform an A/D conversion:
+
+1.	Configure the A/D module:
+    •	Configure analog pins, voltage reference and digital I/O (ADCON1)
+    •	Select A/D input channel (ADCON0)
+    •	Select A/D acquisition time (ADCON2)
+    •	Select A/D conversion clock (ADCON2)
+    •	Turn on A/D module (ADCON0)
+2.	Wait the required acquisition time (if required).
+3.	Start conversion:
+    • Set GO/DONE bit (ADCON0 register)
+4.	Wait for A/D conversion to complete, by Polling for the GO/DONE bit to be cleared
+5.	Read A/D Result registers (ADRESH:ADRESL);
+6.	For next conversion, go to step 1 or step 2, as required. The A/D conversion time per bit is defined as TAD.
+
+The function looks like this: 
+```
+unsigned int ADCRead()
+{
+    ADCON0=0b00000000;	//channel 0
+    ADCON1=0b00001001;	//VDD and VSS as voltage reference
+    ADCON2=0b00111111;	// acquisition time 20 TAD , clock from A/D RC oscillator
+
+    ADON=1; 	        //switch on the adc module
+    GODONE=1;  	        //Start conversion
+    while(GODONE);	    //wait for the conversion to finish
+    ADON=0;  	        //switch off adc
+    return ADRES;
+}
+```
+The bit-descriptions of the three ADC control-registers are given in Figures 9-11 below:
+
+![Alt text](/Figures/Fig9_ADCON0.jpg?raw=true "ADCON0")
+###### Figure 9: A/D Control Register 0 (ADCON0)
+
+![Alt text](/Figures/Fig10_ADCON1.png?raw=true "ADCON1")
+###### Figure 10: A/D Control Register 1 (ADCON1)
+
+![Alt text](/Figures/Fig11_ADCON2.jpg?raw=true "ADCON2")
+###### Figure 11: A/D Control Register 2 (ADCON2)
 
