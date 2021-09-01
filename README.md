@@ -201,20 +201,30 @@ hid_report_feature[0]=adcread.v[1];	//adresh
 hid_report_feature[1]=adcread.v[0];	//adresl
 ```
 
-The ADCRead() function is a user-defined function. PIC18F4550 icrocontroller's 10-bit ADC module has five registers: 
+The ADCRead() function is a user-defined function. PIC18F4550 icrocontroller's 10-bit ADC module has five registers:
+
     •	A/D Result High Register (ADRESH)
+    
     •	A/D Result Low Register (ADRESL)
+    
     •	A/D Control Register 0 (ADCON0)
+    
     •	A/D Control Register 1 (ADCON1)
+    
     •	A/D Control Register 2 (ADCON2)
 
 The following steps should be followed to perform an A/D conversion:
 
 1.	Configure the A/D module:
+
     •	Configure analog pins, voltage reference and digital I/O (ADCON1)
+    
     •	Select A/D input channel (ADCON0)
+    
     •	Select A/D acquisition time (ADCON2)
+    
     •	Select A/D conversion clock (ADCON2)
+    
     •	Turn on A/D module (ADCON0)
 2.	Wait the required acquisition time (if required).
 3.	Start conversion:
