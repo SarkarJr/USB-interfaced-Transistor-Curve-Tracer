@@ -240,12 +240,12 @@ unsigned int ADCRead()
 ```
 The bit-descriptions of the three ADC control-registers are given in Figures 9-11 below:
 
-![Alt text](/Figures/Fig9_ADCON0.jpg?raw=true "ADCON0")
+![Alt text](/Figures/ADCON0.jpg?raw=true "ADCON0")
 ###### Figure 9: A/D Control Register 0 (ADCON0)
 
-![Alt text](/Figures/Fig10_ADCON1.png?raw=true "ADCON1")
+![Alt text](/Figures/ADCON1.png?raw=true "ADCON1")
 ###### Figure 10: A/D Control Register 1 (ADCON1)
 
-![Alt text](/Figures/Fig11_ADCON2.jpg?raw=true "ADCON2")
+![Alt text](/Figures/ADCON2.jpg?raw=true "ADCON2")
 ###### Figure 11: A/D Control Register 2 (ADCON2)
 
